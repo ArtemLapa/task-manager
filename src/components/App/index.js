@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./style.css";
 
 let initTasks = [
   { id: 1, title: "do somthing", done: true },
@@ -29,23 +30,25 @@ const App = () => {
   };
 
   return (
-    <>
-      <div>
+    <div className="container">
+      <div className="box">
         <input type="text" value={newTask} onChange={enterNewTask} />
         <button onClick={addNewTask}>Add to task</button>
       </div>
-      <ul className="tasks-list">
-        {tasks.map((el) => (
-          <li
-            key={el.id}
-            className={el.done ? "task-done" : ""}
-            onClick={() => changeTaskStatus(el)}
-          >
-            {el.title}
-          </li>
-        ))}
-      </ul>
-    </>
+      <div className="box">
+        <ul className="tasks-list">
+          {tasks.map((el) => (
+            <li
+              key={el.id}
+              className={el.done ? "task-done" : ""}
+              onClick={() => changeTaskStatus(el)}
+            >
+              {el.title}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 };
 
