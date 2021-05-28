@@ -3,13 +3,14 @@ import React, { useState } from "react";
 let initTasks = [
   { id: 1, title: "do somthing", done: true },
   { id: 2, title: "check smartphone", done: false },
-  { id: 3, title: "clear shoose", done: true },
+  { id: 3, title: "clear shoose", done: false },
 ];
 
 const App = () => {
+  const [newTask, setNewTasks] = useState("");
   const [tasks, setTasks] = useState(initTasks);
 
-  const changeTaskStatus = (tasks, el) => {
+  const changeTaskStatus = (el) => {
     console.log(el);
     setTasks(
       tasks.map((item) =>
@@ -18,14 +19,27 @@ const App = () => {
     );
   };
 
+  const enterNewTask = (e) => {
+    setNewTasks(e.target.value);
+  };
+
+  const addNewTask = () => {
+    setTasks([...tasks, { id: tasks.length + 1, title: newTask, done: false }]);
+    setNewTasks("");
+  };
+
   return (
     <>
+      <div>
+        <input type="text" value={newTask} onChange={enterNewTask} />
+        <button onClick={addNewTask}>Add to task</button>
+      </div>
       <ul className="tasks-list">
         {tasks.map((el) => (
           <li
             key={el.id}
             className={el.done ? "task-done" : ""}
-            onClick={() => changeTaskStatus(tasks, el)}
+            onClick={() => changeTaskStatus(el)}
           >
             {el.title}
           </li>
