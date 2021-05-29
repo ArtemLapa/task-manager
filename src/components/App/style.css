@@ -15,12 +15,17 @@
 }
 
 .tasks-list li {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   cursor: pointer;
+  border-bottom: 1px solid #ccc;
 }
 
-.task-done {
+.tasks-list li:last-child {
+  border-bottom: none;
+}
+
+.task-delete {
   text-decoration: line-through;
-  font-weight: bold;
+  color: #ccc;
 }

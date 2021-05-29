@@ -1,23 +1,23 @@
-import React, { useState } from "react";
-import "./style.css";
+import React, { useState } from 'react';
+import './style.css';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckSquare, faSquare } from '@fortawesome/free-regular-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 let initTasks = [
-  { id: 1, title: "do somthing", done: true },
-  { id: 2, title: "check smartphone", done: false },
-  { id: 3, title: "clear shoose", done: false },
+  { id: 1, title: 'do somthing', done: true, delete: true },
+  { id: 2, title: 'check smartphone', done: false, delete: false },
+  { id: 3, title: 'clear shoose', done: false, delete: false },
 ];
 
 const App = () => {
-  const [newTask, setNewTasks] = useState("");
+  const [newTask, setNewTasks] = useState('');
   const [tasks, setTasks] = useState(initTasks);
 
   const changeTaskStatus = (el) => {
     console.log(el);
-    setTasks(
-      tasks.map((item) =>
-        item.id === el.id ? { ...item, done: !item.done } : item
-      )
-    );
+    setTasks(tasks.map((item) => (item.id === el.id ? { ...item, done: !item.done } : item)));
   };
 
   const enterNewTask = (e) => {
@@ -26,7 +26,7 @@ const App = () => {
 
   const addNewTask = () => {
     setTasks([...tasks, { id: tasks.length + 1, title: newTask, done: false }]);
-    setNewTasks("");
+    setNewTasks('');
   };
 
   return (
@@ -40,10 +40,10 @@ const App = () => {
           {tasks.map((el) => (
             <li
               key={el.id}
-              className={el.done ? "task-done" : ""}
               onClick={() => changeTaskStatus(el)}
-            >
-              {el.title}
+              className={el.delete && 'task-delete'}>
+              <FontAwesomeIcon icon={el.done ? faCheckSquare : faSquare} /> {el.title}{' '}
+              <FontAwesomeIcon icon={faTrash} />
             </li>
           ))}
         </ul>
