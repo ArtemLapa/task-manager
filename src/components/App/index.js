@@ -7,7 +7,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 let initTasks = [
   { id: 1, title: 'do somthing', done: true, delete: true },
-  { id: 2, title: 'check smartphone', done: false, delete: false },
+  { id: 2, title: 'check smartphone', done: true, delete: false },
   { id: 3, title: 'clear shoose', done: false, delete: false },
 ];
 
@@ -31,6 +31,14 @@ const App = () => {
 
   return (
     <div className="container">
+      <div className="box">
+        <ul className="tabs-select">
+          <li className="tab-select-item">All</li>
+          <li className="tab-select-item">ToDo</li>
+          <li className="tab-select-item">Done</li>
+          <li className="tab-select-item">Delete</li>
+        </ul>
+      </div>
       <div className="box">
         <input type="text" value={newTask} onChange={enterNewTask} />
         <button onClick={addNewTask}>Add to task</button>
