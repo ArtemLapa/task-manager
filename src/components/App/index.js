@@ -1,23 +1,27 @@
-import React, { useState } from 'react';
-import './style.css';
+import React, { useState } from "react";
+import "./style.css";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckSquare, faSquare } from '@fortawesome/free-regular-svg-icons';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckSquare, faSquare } from "@fortawesome/free-regular-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 let initTasks = [
-  { id: 1, title: 'do somthing', done: true, delete: true },
-  { id: 2, title: 'check smartphone', done: true, delete: false },
-  { id: 3, title: 'clear shoose', done: false, delete: false },
+  { id: 1, title: "do somthing", done: true, delete: true },
+  { id: 2, title: "check smartphone", done: true, delete: false },
+  { id: 3, title: "clear shoose", done: false, delete: false },
 ];
 
 const App = () => {
-  const [newTask, setNewTasks] = useState('');
+  const [newTask, setNewTasks] = useState("");
   const [tasks, setTasks] = useState(initTasks);
 
   const changeTaskStatus = (el) => {
     console.log(el);
-    setTasks(tasks.map((item) => (item.id === el.id ? { ...item, done: !item.done } : item)));
+    setTasks(
+      tasks.map((item) =>
+        item.id === el.id ? { ...item, done: !item.done } : item
+      )
+    );
   };
 
   const enterNewTask = (e) => {
@@ -26,17 +30,57 @@ const App = () => {
 
   const addNewTask = () => {
     setTasks([...tasks, { id: tasks.length + 1, title: newTask, done: false }]);
-    setNewTasks('');
+    setNewTasks("");
   };
 
   return (
     <div className="container">
       <div className="box">
         <ul className="tabs-select">
-          <li className="tab-select-item">All</li>
-          <li className="tab-select-item">ToDo</li>
-          <li className="tab-select-item">Done</li>
-          <li className="tab-select-item">Delete</li>
+          <li
+            className="tab-select-item"
+            onClick={() => {
+              setTasks(initTasks);
+            }}
+          >
+            All
+          </li>
+          <li
+            className="tab-select-item"
+            onClick={() => {
+              setTasks(
+                initTasks.filter((el) => {
+                  return !el.done && !el.delete;
+                })
+              );
+            }}
+          >
+            ToDo
+          </li>
+          <li
+            className="tab-select-item"
+            onClick={() => {
+              setTasks(
+                initTasks.filter((el) => {
+                  return el.done && el.delete;
+                })
+              );
+            }}
+          >
+            Done
+          </li>
+          <li
+            className="tab-select-item"
+            onClick={() => {
+              setTasks(
+                initTasks.filter((el) => {
+                  return el.delete;
+                })
+              );
+            }}
+          >
+            Delete
+          </li>
         </ul>
       </div>
       <div className="box">
@@ -49,9 +93,10 @@ const App = () => {
             <li
               key={el.id}
               onClick={() => changeTaskStatus(el)}
-              className={el.delete && 'task-delete'}>
-              <FontAwesomeIcon icon={el.done ? faCheckSquare : faSquare} /> {el.title}{' '}
-              <FontAwesomeIcon icon={faTrash} />
+              className={el.delete ? "task-delete" : ""}
+            >
+              <FontAwesomeIcon icon={el.done ? faCheckSquare : faSquare} />{" "}
+              {el.title} <FontAwesomeIcon icon={faTrash} />
             </li>
           ))}
         </ul>
