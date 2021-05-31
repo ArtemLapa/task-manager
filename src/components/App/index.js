@@ -14,6 +14,7 @@ let initTasks = [
 const App = () => {
   const [newTask, setNewTasks] = useState("");
   const [tasks, setTasks] = useState(initTasks);
+  const [activeTab, setActiveTab] = useState("all");
 
   const changeTaskStatus = (el) => {
     console.log(el);
@@ -40,7 +41,7 @@ const App = () => {
           <li
             className="tab-select-item"
             onClick={() => {
-              setTasks(initTasks);
+              setActiveTab("all");
             }}
           >
             All
@@ -48,11 +49,7 @@ const App = () => {
           <li
             className="tab-select-item"
             onClick={() => {
-              setTasks(
-                initTasks.filter((el) => {
-                  return !el.done && !el.delete;
-                })
-              );
+              setActiveTab("todo");
             }}
           >
             ToDo
@@ -60,11 +57,7 @@ const App = () => {
           <li
             className="tab-select-item"
             onClick={() => {
-              setTasks(
-                initTasks.filter((el) => {
-                  return el.done && el.delete;
-                })
-              );
+              setActiveTab("done");
             }}
           >
             Done
@@ -72,35 +65,98 @@ const App = () => {
           <li
             className="tab-select-item"
             onClick={() => {
-              setTasks(
-                initTasks.filter((el) => {
-                  return el.delete;
-                })
-              );
+              setActiveTab("delete");
             }}
           >
             Delete
           </li>
         </ul>
       </div>
+
       <div className="box">
         <input type="text" value={newTask} onChange={enterNewTask} />
         <button onClick={addNewTask}>Add to task</button>
       </div>
-      <div className="box">
-        <ul className="tasks-list">
-          {tasks.map((el) => (
-            <li
-              key={el.id}
-              onClick={() => changeTaskStatus(el)}
-              className={el.delete ? "task-delete" : ""}
-            >
-              <FontAwesomeIcon icon={el.done ? faCheckSquare : faSquare} />{" "}
-              {el.title} <FontAwesomeIcon icon={faTrash} />
-            </li>
-          ))}
-        </ul>
-      </div>
+
+      {activeTab === "all" && (
+        <div className="box">
+          <ul className="tasks-list all">
+            {tasks.map((el) => (
+              <li
+                key={el.id}
+                onClick={() => changeTaskStatus(el)}
+                className={el.delete ? "task-delete" : ""}
+              >
+                <FontAwesomeIcon icon={el.done ? faCheckSquare : faSquare} />{" "}
+                {el.title} <FontAwesomeIcon icon={faTrash} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {activeTab === "todo" && (
+        <div className="box">
+          <ul className="tasks-list todo">
+            {tasks
+              .filter((el) => {
+                return !el.done && !el.delete;
+              })
+              .map((el) => (
+                <li
+                  key={el.id}
+                  onClick={() => changeTaskStatus(el)}
+                  className={el.delete ? "task-delete" : ""}
+                >
+                  <FontAwesomeIcon icon={el.done ? faCheckSquare : faSquare} />{" "}
+                  {el.title} <FontAwesomeIcon icon={faTrash} />
+                </li>
+              ))}
+          </ul>
+        </div>
+      )}
+
+      {activeTab === "done" && (
+        <div className="box">
+          <ul className="tasks-list done">
+            {tasks
+              .filter((el) => {
+                return el.done && el.delete;
+              })
+              .map((el) => (
+                <li
+                  key={el.id}
+                  onClick={() => changeTaskStatus(el)}
+                  className={el.delete ? "task-delete" : ""}
+                >
+                  <FontAwesomeIcon icon={el.done ? faCheckSquare : faSquare} />{" "}
+                  {el.title} <FontAwesomeIcon icon={faTrash} />
+                </li>
+              ))}
+          </ul>
+        </div>
+      )}
+
+      {activeTab === "delete" && (
+        <div className="box">
+          <ul className="tasks-list delete">
+            {tasks
+              .filter((el) => {
+                return el.delete;
+              })
+              .map((el) => (
+                <li
+                  key={el.id}
+                  onClick={() => changeTaskStatus(el)}
+                  className={el.delete ? "task-delete" : ""}
+                >
+                  <FontAwesomeIcon icon={el.done ? faCheckSquare : faSquare} />{" "}
+                  {el.title} <FontAwesomeIcon icon={faTrash} />
+                </li>
+              ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };
