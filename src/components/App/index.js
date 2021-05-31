@@ -1,23 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./style.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckSquare, faSquare } from "@fortawesome/free-regular-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
-let initTasks = [
-  { id: 1, title: "do somthing", done: true, delete: true },
-  { id: 2, title: "check smartphone", done: true, delete: false },
-  { id: 3, title: "clear shoose", done: false, delete: false },
-];
+let initTasks = [];
 
 const App = () => {
   const [newTask, setNewTasks] = useState("");
   const [tasks, setTasks] = useState(initTasks);
   const [activeTab, setActiveTab] = useState("all");
 
+  useEffect(() => {
+    setTimeout(() => {
+      setTasks([
+        { id: 1, title: "do somthing", done: true, delete: true },
+        { id: 2, title: "check smartphone", done: true, delete: false },
+        { id: 3, title: "clear shoose", done: false, delete: false },
+      ]);
+    }, 2000);
+  }, []);
+
   const changeTaskStatus = (el) => {
-    console.log(el);
+    // console.log(el);
     setTasks(
       tasks.map((item) =>
         item.id === el.id ? { ...item, done: !item.done } : item
@@ -39,7 +45,7 @@ const App = () => {
       <div className="box">
         <ul className="tabs-select">
           <li
-            className="tab-select-item"
+            className={`tab-select-item ${activeTab === "all" ? "active" : ""}`}
             onClick={() => {
               setActiveTab("all");
             }}
@@ -47,7 +53,9 @@ const App = () => {
             All
           </li>
           <li
-            className="tab-select-item"
+            className={`tab-select-item ${
+              activeTab === "todo" ? "active" : ""
+            }`}
             onClick={() => {
               setActiveTab("todo");
             }}
@@ -55,7 +63,9 @@ const App = () => {
             ToDo
           </li>
           <li
-            className="tab-select-item"
+            className={`tab-select-item ${
+              activeTab === "done" ? "active" : ""
+            }`}
             onClick={() => {
               setActiveTab("done");
             }}
@@ -63,7 +73,9 @@ const App = () => {
             Done
           </li>
           <li
-            className="tab-select-item"
+            className={`tab-select-item ${
+              activeTab === "delete" ? "active" : ""
+            }`}
             onClick={() => {
               setActiveTab("delete");
             }}
@@ -81,16 +93,20 @@ const App = () => {
       {activeTab === "all" && (
         <div className="box">
           <ul className="tasks-list all">
-            {tasks.map((el) => (
-              <li
-                key={el.id}
-                onClick={() => changeTaskStatus(el)}
-                className={el.delete ? "task-delete" : ""}
-              >
-                <FontAwesomeIcon icon={el.done ? faCheckSquare : faSquare} />{" "}
-                {el.title} <FontAwesomeIcon icon={faTrash} />
-              </li>
-            ))}
+            {tasks.length ? (
+              tasks.map((el) => (
+                <li
+                  key={el.id}
+                  onClick={() => changeTaskStatus(el)}
+                  className={el.delete ? "task-delete" : ""}
+                >
+                  <FontAwesomeIcon icon={el.done ? faCheckSquare : faSquare} />{" "}
+                  {el.title} <FontAwesomeIcon icon={faTrash} />
+                </li>
+              ))
+            ) : (
+              <div>Task not found</div>
+            )}
           </ul>
         </div>
       )}

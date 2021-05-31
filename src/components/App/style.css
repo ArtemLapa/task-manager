@@ -25,6 +25,11 @@
   cursor: pointer;
 }
 
+.tab-select-item.active {
+  color: #0006ff;
+  font-weight: bold;
+}
+
 .tasks-list li {
   padding-top: 10px;
   padding-bottom: 10px;
