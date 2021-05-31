@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
-import "./style.css";
+import "./style.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheckSquare, faSquare } from "@fortawesome/free-regular-svg-icons";
+import {
+  faCheckSquare,
+  faSquare,
+  faTrashAlt,
+} from "@fortawesome/free-regular-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 let initTasks = [];
@@ -41,138 +45,85 @@ const App = () => {
   };
 
   return (
-    <div className="container">
-      <div className="box">
-        <ul className="tabs-select">
-          <li
-            className={`tab-select-item ${activeTab === "all" ? "active" : ""}`}
-            onClick={() => {
-              setActiveTab("all");
-            }}
-          >
-            All
-          </li>
-          <li
-            className={`tab-select-item ${
-              activeTab === "todo" ? "active" : ""
-            }`}
-            onClick={() => {
-              setActiveTab("todo");
-            }}
-          >
-            ToDo
-          </li>
-          <li
-            className={`tab-select-item ${
-              activeTab === "done" ? "active" : ""
-            }`}
-            onClick={() => {
-              setActiveTab("done");
-            }}
-          >
-            Done
-          </li>
-          <li
-            className={`tab-select-item ${
-              activeTab === "delete" ? "active" : ""
-            }`}
-            onClick={() => {
-              setActiveTab("delete");
-            }}
-          >
-            Delete
-          </li>
-        </ul>
+    <div className="device__wrapper">
+      <div className="device">
+        <div className="header">
+          <div className="iphone__x"></div>
+          <h1>Hello, Artem</h1>
+          <div className="greeting">Today, Sat 27 Jun</div>
+        </div>
+
+        <div className="content">
+          <div className="tasks all__tasks active">
+            <div className="tasks__tab__wrapper">
+              <div className="title__wrapper">
+                <div className="title">All tasks</div>
+                <div className="description">Here you can manage all tasks</div>
+              </div>
+              <div className="task__counter">12</div>
+            </div>
+
+            <div className="tasks__list__wrapper show">
+              <ul className="tasks__list">
+                {tasks.map((el) => (
+                  <li className="task__element" key={el.id}>
+                    <FontAwesomeIcon icon={faSquare} />
+                    <span className="task__text">{el.title}</span>
+                    <FontAwesomeIcon icon={faTrashAlt} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="tasks todo__tasks">
+            <div className="tasks__tab__wrapper">
+              <div className="title__wrapper">
+                <div className="title">Todo tasks</div>
+                <div className="description">
+                  Here you can manage tasks to be completed
+                </div>
+              </div>
+              <div className="task__counter">10</div>
+            </div>
+          </div>
+
+          <div className="tasks done__tasks">
+            <div className="tasks__tab__wrapper">
+              <div className="title__wrapper">
+                <div className="title">Done tasks</div>
+                <div className="description">
+                  Here you manage the tasks that you have already done
+                </div>
+              </div>
+              <div className="task__counter">1</div>
+            </div>
+          </div>
+
+          <div className="tasks done__tasks">
+            <div className="tasks__tab__wrapper">
+              <div className="title__wrapper">
+                <div className="title">Removed tasks</div>
+                <div className="description">
+                  Here you can see the tasks that you have been removed
+                </div>
+              </div>
+              <div className="task__counter">1</div>
+            </div>
+          </div>
+        </div>
+
+        <div className="footer">
+          <div className="add__button__wrapper">
+            <span className="hr"></span>
+            <span className="hr vr"></span>
+          </div>
+          <div className="add__task__form__wrapper">
+            <label /*for="task_input"*/>Add new task for today</label>
+            <input id="task_input" type="text" placeholder="Enter smth here" />
+          </div>
+        </div>
       </div>
-
-      <div className="box">
-        <input type="text" value={newTask} onChange={enterNewTask} />
-        <button onClick={addNewTask}>Add to task</button>
-      </div>
-
-      {activeTab === "all" && (
-        <div className="box">
-          <ul className="tasks-list all">
-            {tasks.length ? (
-              tasks.map((el) => (
-                <li
-                  key={el.id}
-                  onClick={() => changeTaskStatus(el)}
-                  className={el.delete ? "task-delete" : ""}
-                >
-                  <FontAwesomeIcon icon={el.done ? faCheckSquare : faSquare} />{" "}
-                  {el.title} <FontAwesomeIcon icon={faTrash} />
-                </li>
-              ))
-            ) : (
-              <div>Task not found</div>
-            )}
-          </ul>
-        </div>
-      )}
-
-      {activeTab === "todo" && (
-        <div className="box">
-          <ul className="tasks-list todo">
-            {tasks
-              .filter((el) => {
-                return !el.done && !el.delete;
-              })
-              .map((el) => (
-                <li
-                  key={el.id}
-                  onClick={() => changeTaskStatus(el)}
-                  className={el.delete ? "task-delete" : ""}
-                >
-                  <FontAwesomeIcon icon={el.done ? faCheckSquare : faSquare} />{" "}
-                  {el.title} <FontAwesomeIcon icon={faTrash} />
-                </li>
-              ))}
-          </ul>
-        </div>
-      )}
-
-      {activeTab === "done" && (
-        <div className="box">
-          <ul className="tasks-list done">
-            {tasks
-              .filter((el) => {
-                return el.done && el.delete;
-              })
-              .map((el) => (
-                <li
-                  key={el.id}
-                  onClick={() => changeTaskStatus(el)}
-                  className={el.delete ? "task-delete" : ""}
-                >
-                  <FontAwesomeIcon icon={el.done ? faCheckSquare : faSquare} />{" "}
-                  {el.title} <FontAwesomeIcon icon={faTrash} />
-                </li>
-              ))}
-          </ul>
-        </div>
-      )}
-
-      {activeTab === "delete" && (
-        <div className="box">
-          <ul className="tasks-list delete">
-            {tasks
-              .filter((el) => {
-                return el.delete;
-              })
-              .map((el) => (
-                <li
-                  key={el.id}
-                  onClick={() => changeTaskStatus(el)}
-                  className={el.delete ? "task-delete" : ""}
-                >
-                  <FontAwesomeIcon icon={el.done ? faCheckSquare : faSquare} />{" "}
-                  {el.title} <FontAwesomeIcon icon={faTrash} />
-                </li>
-              ))}
-          </ul>
-        </div>
-      )}
     </div>
   );
 };
