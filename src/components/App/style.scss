@@ -115,7 +115,7 @@ ul {
           margin: 10px 0px;
           display: none;
 
-          &.show {
+          &.active {
             display: block;
             transition: display .3s ease-in;
           }
@@ -233,7 +233,10 @@ ul {
         border-top-left-radius: 25px;
         border-top-right-radius: 25px;
         box-shadow: 0px -4px 6px 0px rgba(0, 0, 0, 0.125);
-        display: none;
+        display: flex;
+        flex-direction: column;
+        transition: height .3s ease;
+        overflow: hidden;
 
         label {
           font-weight: 700;
@@ -251,10 +254,8 @@ ul {
         }
       }
 
-      &.show {
+      &.active {
         .add__task__form__wrapper {
-          display: flex;
-          flex-direction: column;
           height: 166px;
           transition: all .3s ease-in;
         }
