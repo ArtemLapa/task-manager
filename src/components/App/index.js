@@ -11,10 +11,11 @@ import {
 let initTasks = [];
 
 const App = () => {
-  // const [newTask, setNewTasks] = useState("");
+  const [newTask, setNewTasks] = useState("");
   const [tasks, setTasks] = useState(initTasks);
   const [activeTab, setActiveTab] = useState("all");
   const [isAddTaskFormOpen, setAddTaskFormOpen] = useState(false);
+  // const [isAddTaskFormOpen, setAddTaskFormOpen] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
@@ -111,14 +112,26 @@ const App = () => {
       break;
   }
 
-  // const enterNewTask = (e) => {
-  //   setNewTasks(e.target.value);
-  // };
+  const enterNewTask = (e) => {
+    setNewTasks(e.target.value);
+  };
 
-  // const addNewTask = () => {
-  //   setTasks([...tasks, { id: tasks.length + 1, title: newTask, done: false }]);
-  //   setNewTasks("");
-  // };
+  const addNewTask = () => {
+    setTasks([...tasks, { id: tasks.length + 1, title: newTask, done: false }]);
+    setNewTasks("");
+  };
+
+  const keyBoardHandler = (e) => {
+    if (e.keyCode === 13) {
+      addNewTask();
+      setNewTasks("");
+      setAddTaskFormOpen(false);
+    }
+    if (e.keyCode === 27) {
+      setNewTasks("");
+      setAddTaskFormOpen(false);
+    }
+  };
 
   return (
     <div className="device__wrapper">
@@ -371,11 +384,18 @@ const App = () => {
             }}
           >
             <span className="hr"></span>
-            <span className="hr vr"></span>
+            <span className={`hr ${isAddTaskFormOpen ? "" : "vr"}`}></span>
           </div>
           <div className="add__task__form__wrapper">
             <label /*for="task_input"*/>Add new task for today</label>
-            <input id="task_input" type="text" placeholder="Enter smth here" />
+            <input
+              id="task_input"
+              type="text"
+              placeholder="Enter smth here"
+              value={newTask}
+              onChange={enterNewTask}
+              onKeyUp={keyBoardHandler}
+            />
           </div>
         </div>
       </div>

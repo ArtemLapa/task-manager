@@ -82,7 +82,7 @@ ul {
         box-sizing: border-box;
         box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.125);
         cursor: pointer;
-        transition: transform .3s;
+        transition: all .3s ease-in;
 
         &.active {
           cursor: default;
@@ -90,6 +90,7 @@ ul {
 
         &:hover:not(.active) {
           transform: scale(1.04);
+          transition: transform .3s ease-in;
         }
 
         .tasks__tab__wrapper {
@@ -116,6 +117,7 @@ ul {
 
           &.show {
             display: block;
+            transition: display .3s ease-in;
           }
 
           .tasks__list {
@@ -149,6 +151,9 @@ ul {
               }
 
               &.removed {
+                svg {
+                  display: none;
+                }
 
                 .fa,
                 .far,
@@ -214,7 +219,7 @@ ul {
           top: 50%;
           transform: translate(-50%, -50%);
           background-color: #fff;
-
+          transition: transform .3s ease;
           &.vr {
             transform: translate(-50%, -50%) rotate(90deg);
           }
@@ -251,6 +256,7 @@ ul {
           display: flex;
           flex-direction: column;
           height: 166px;
+          transition: all .3s ease-in;
         }
       }
     }
