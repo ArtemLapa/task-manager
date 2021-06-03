@@ -86,7 +86,7 @@ const HeaderComponent = () => {
   }
   return (
     <HeaderWrapper>
-      <DeviceIphoneWrapper deviceBorderColor="#fff"></DeviceIphoneWrapper>
+      <DeviceIphoneWrapper deviceBorderColor="#333"></DeviceIphoneWrapper>
       <h1>Hello, Artem</h1>
       <div className="greeting">{`Today, ${d_week} ${day.getDate()} ${month}`}</div>
     </HeaderWrapper>

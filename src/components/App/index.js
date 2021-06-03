@@ -1,9 +1,24 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMoon, faSun } from "@fortawesome/free-regular-svg-icons";
 
 import HeaderComponent from "../HeaderComponent";
 import FooterComponent from "../FooterComponent";
 import ContentComponent from "../ContentComponent";
+
+const theme = {
+  light: {
+    containerBgColor: "#eaeae0",
+    mainBorderColor: "#333",
+    buttonBgColor: "#eee",
+  },
+  dark: {
+    containerBgColor: "#4c4c49",
+    mainBorderColor: "#eee",
+    buttonBgColor: "#333",
+  },
+};
 
 const Container = styled.div`
   height: 100vh;
@@ -24,7 +39,6 @@ const DeviceWrapper = styled.div`
   border: 4px solid ${(props) => props.deviceBorderColor};
 
   .device {
-    //padding: 20px;
     box-sizing: border-box;
     height: 100%;
     width: 100%;
@@ -36,6 +50,22 @@ const DeviceWrapper = styled.div`
   }
 `;
 
+const ButtonWrapper = styled.button`
+  width: 50px;
+  height: 50px;
+  position: fixed;
+  right: 16px;
+  top: 16px;
+  color: ${(props) => props.mainBorderColor};
+  background-color: ${(props) => props.buttonBgColor};
+  border: 1px solid ${(props) => props.mainBorderColor};
+  border-radius: 50%;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
+`;
+
 let initTasks = [];
 
 const App = () => {
@@ -43,6 +73,7 @@ const App = () => {
   const [tasks, setTasks] = useState(initTasks);
   const [activeTab, setActiveTab] = useState("all");
   const [isAddTaskFormOpen, setAddTaskFormOpen] = useState(false);
+  const [isDarkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
@@ -94,9 +125,25 @@ const App = () => {
     }
   };
 
+  const selectedTheme = isDarkMode ? theme.dark : theme.light;
+
   return (
-    <Container containerBgColor="#eaeae0">
-      <DeviceWrapper deviceBorderColor="#fff" deviceBgColor="#f3f3f3">
+    <Container containerBgColor={selectedTheme.containerBgColor}>
+      <ButtonWrapper
+        mainBorderColor={selectedTheme.mainBorderColor}
+        buttonBgColor={selectedTheme.buttonBgColor}
+        onClick={() => {
+          setDarkMode(!isDarkMode);
+        }}
+      >
+        <FontAwesomeIcon icon={isDarkMode ? faSun : faMoon} className="fa" />
+      </ButtonWrapper>
+
+      <DeviceWrapper
+        deviceBorderColor="#333"
+        deviceBgColor="#f3f3f3"
+        mainBorderColor="#333"
+      >
         <div className="device">
           <HeaderComponent />
 

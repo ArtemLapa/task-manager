@@ -39,7 +39,10 @@ const TabComponent = ({
   taskListHeight,
 }) => {
   return (
-    <TabWrapper className={activeTab === nameTab ? "active" : ""}>
+    <TabWrapper
+      className={activeTab === nameTab ? "active" : ""}
+      tabWrapperShadowColor="rgba(0, 0, 0, 0.25)"
+    >
       <TaskTabComponent
         tasks={tasks}
         nameTab={nameTab}
@@ -47,7 +50,6 @@ const TabComponent = ({
         tabDescription={tabDescription}
         setActiveTab={setActiveTab}
         tabWrapperBgColor="#fff"
-        tabWrapperShadowColor="rgba(0, 0, 0, 0.125)"
       />
       <TaskListComponent
         tasks={tasks}
