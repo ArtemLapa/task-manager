@@ -1,6 +1,35 @@
 import React from "react";
-
 import TaskElementComponent from "../TaskElementComponent";
+import styled, { keyframes } from "styled-components";
+
+const hide = (h) => keyframes`
+  0% {
+    height: ${h}px;
+  }
+  100% {
+    height: 0;
+  }
+`;
+const show = (h) => keyframes`
+  0% {
+    height: 0;
+  }
+  100% {
+    height: ${h}px;
+  }
+`;
+
+const TaskListWrapper = styled.div`
+  margin: 10px 0px;
+  animation: ${(props) => hide(props.taskListHeight)} 1s;
+  animation-fill-mode: forwards;
+  overflow: hidden;
+
+  &.active {
+    animation: ${(props) => show(props.taskListHeight)} 1s;
+    animation-fill-mode: forwards;
+  }
+`;
 
 const TabComponent = ({
   tasks,
@@ -11,7 +40,9 @@ const TabComponent = ({
   nameTab,
   tabTitle,
   tabDescription,
+  taskListHeight,
 }) => {
+  console.log(nameTab, taskListHeight);
   return (
     <div className={`tasks ${activeTab === nameTab ? "active" : ""}`}>
       <div
@@ -26,10 +57,9 @@ const TabComponent = ({
         </div>
         <div className="task__counter">{tasks.length}</div>
       </div>
-      <div
-        className={`tasks__list__wrapper ${
-          activeTab === nameTab ? "active" : ""
-        }`}
+      <TaskListWrapper
+        className={activeTab === nameTab ? "active" : ""}
+        taskListHeight={taskListHeight}
       >
         <ul className="tasks__list">
           {tasks.map((el) => {
@@ -44,7 +74,7 @@ const TabComponent = ({
             );
           })}
         </ul>
-      </div>
+      </TaskListWrapper>
     </div>
   );
 };
