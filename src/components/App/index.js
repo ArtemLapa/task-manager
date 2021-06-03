@@ -1,9 +1,40 @@
 import React, { useState, useEffect } from "react";
-import "./style.scss";
+import styled from "styled-components";
 
 import HeaderComponent from "../HeaderComponent";
 import FooterComponent from "../FooterComponent";
 import ContentComponent from "../ContentComponent";
+
+const Container = styled.div`
+  height: 100vh;
+  width: 100vw;
+  background: ${(props) => props.containerBgColor};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const DeviceWrapper = styled.div`
+  box-sizing: border-box;
+  height: 800px;
+  width: 375px;
+  overflow: hidden;
+  border-radius: 40px;
+  box-shadow: 2px 12px 20px 2px rgba(0, 0, 0, 0.25);
+  border: 4px solid ${(props) => props.deviceBorderColor};
+
+  .device {
+    //padding: 20px;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    background: ${(props) => props.deviceBgColor};
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    position: relative;
+  }
+`;
 
 let initTasks = [];
 
@@ -64,27 +95,29 @@ const App = () => {
   };
 
   return (
-    <div className="device__wrapper">
-      <div className="device">
-        <HeaderComponent />
+    <Container containerBgColor="#eaeae0">
+      <DeviceWrapper deviceBorderColor="#fff" deviceBgColor="#f3f3f3">
+        <div className="device">
+          <HeaderComponent />
 
-        <ContentComponent
-          tasks={tasks}
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          changeTaskStatus={changeTaskStatus}
-          changeTaskStatusDelete={changeTaskStatusDelete}
-        />
+          <ContentComponent
+            tasks={tasks}
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            changeTaskStatus={changeTaskStatus}
+            changeTaskStatusDelete={changeTaskStatusDelete}
+          />
 
-        <FooterComponent
-          setAddTaskFormOpen={setAddTaskFormOpen}
-          newTask={newTask}
-          enterNewTask={enterNewTask}
-          keyBoardHandler={keyBoardHandler}
-          isAddTaskFormOpen={isAddTaskFormOpen}
-        />
-      </div>
-    </div>
+          <FooterComponent
+            setAddTaskFormOpen={setAddTaskFormOpen}
+            newTask={newTask}
+            enterNewTask={enterNewTask}
+            keyBoardHandler={keyBoardHandler}
+            isAddTaskFormOpen={isAddTaskFormOpen}
+          />
+        </div>
+      </DeviceWrapper>
+    </Container>
   );
 };
 

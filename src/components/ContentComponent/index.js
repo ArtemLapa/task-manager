@@ -1,5 +1,11 @@
 import React from "react";
 import TabComponent from "../TabComponent";
+import styled from "styled-components";
+
+const ContentWrapper = styled.div`
+  padding: 0 20px;
+  flex: 1;
+`;
 
 const taskHeight = 50;
 
@@ -11,7 +17,7 @@ const ContentComponent = ({
   changeTaskStatusDelete,
 }) => {
   return (
-    <div className="content">
+    <ContentWrapper>
       <TabComponent
         tasks={tasks}
         activeTab={activeTab}
@@ -77,7 +83,7 @@ const ContentComponent = ({
           }).length * taskHeight
         }
       />
-    </div>
+    </ContentWrapper>
   );
 };
 
