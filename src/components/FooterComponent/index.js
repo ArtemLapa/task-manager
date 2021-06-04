@@ -47,7 +47,7 @@ const Footer = styled.div`
     box-shadow: 0px -4px 6px 0px rgba(0, 0, 0, 0.125);
     display: flex;
     flex-direction: column;
-    transition: height 0.3s ease;
+    transition: height 0.3s ease-in;
     overflow: hidden;
 
     label {
@@ -56,10 +56,11 @@ const Footer = styled.div`
     }
 
     input {
-      border: unset;
+      border: none;
       border-bottom: 1px solid ${(props) => props.inputUnderLineColor};
       height: 20px;
-
+      background-color: ${(props) => props.addTaskFormWrapperBgColor};
+      color: ${(props) => props.mainTextColor};
       &:focus {
         outline: none;
       }
@@ -69,7 +70,7 @@ const Footer = styled.div`
   &.active {
     .add__task__form__wrapper {
       height: 166px;
-      transition: all 0.3s ease-in;
+      transition: height 0.3s ease-in;
     }
   }
 `;
@@ -80,14 +81,20 @@ const FooterComponent = ({
   newTask,
   enterNewTask,
   keyBoardHandler,
+  addButtonWrapperBgColor,
+  addTaskFormWrapperBgColor,
+  hrBgColor,
+  inputUnderLineColor,
+  mainTextColor,
 }) => {
   return (
     <Footer
       className={isAddTaskFormOpen ? "active" : ""}
-      addButtonWrapperBgColor="#000"
-      addTaskFormWrapperBgColor="#fff"
-      hrBgColor="#fff"
-      inputUnderLineColor="#ccc"
+      addButtonWrapperBgColor={addButtonWrapperBgColor}
+      addTaskFormWrapperBgColor={addTaskFormWrapperBgColor}
+      hrBgColor={hrBgColor}
+      inputUnderLineColor={inputUnderLineColor}
+      mainTextColor={mainTextColor}
     >
       <div
         className="add__button__wrapper"
@@ -95,11 +102,11 @@ const FooterComponent = ({
           setAddTaskFormOpen(!isAddTaskFormOpen);
         }}
       >
-        <span className="hr"></span>
-        <span className={`hr ${isAddTaskFormOpen ? "" : "vr"}`}></span>
+        <span className="hr" />
+        <span className={`hr ${isAddTaskFormOpen ? "" : "vr"}`} />
       </div>
       <div className="add__task__form__wrapper">
-        <label /*for="task_input"*/>Add new task for today</label>
+        <label>Add new task for today</label>
         <input
           id="task_input"
           type="text"

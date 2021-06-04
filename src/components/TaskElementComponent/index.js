@@ -14,7 +14,7 @@ const LiComponent = styled.li`
   justify-content: space-around;
 
   &:not(:last-child) {
-    border-bottom: 1px solid #e8e8e8;
+    border-bottom: 1px solid ${(props) => props.borderBottomTaskDivColor};
   }
 
   &:last-child {
@@ -49,7 +49,7 @@ const LiComponent = styled.li`
 
     .task__text {
       text-decoration: line-through;
-      color: #ccc;
+      color: ${(props) => props.removeTaskTextColor};
       font-weight: 100;
     }
   }
@@ -63,7 +63,7 @@ const LiComponent = styled.li`
     }
 
     .task__text {
-      color: #7d7d7d;
+      color: ${(props) => props.doneTaskTextColor};
       font-weight: 100;
     }
   }
@@ -74,9 +74,18 @@ const TaskElementComponent = ({
   el,
   changeTaskStatus,
   changeTaskStatusDelete,
+  borderBottomTaskDivColor,
+  removeTaskTextColor,
+  doneTaskTextColor,
 }) => {
   return (
-    <LiComponent className={cssClass} key={el.id}>
+    <LiComponent
+      className={cssClass}
+      key={el.id}
+      borderBottomTaskDivColor={borderBottomTaskDivColor}
+      removeTaskTextColor={removeTaskTextColor}
+      doneTaskTextColor={doneTaskTextColor}
+    >
       <FontAwesomeIcon
         icon={el.done ? faCheckSquare : faSquare}
         className="fa"

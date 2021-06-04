@@ -38,6 +38,9 @@ const TaskListComponent = ({
   changeTaskStatusDelete,
   nameTab,
   taskListHeight,
+  borderBottomTaskDivColor,
+  removeTaskTextColor,
+  doneTaskTextColor,
 }) => {
   return (
     <TaskListWrapper
@@ -53,6 +56,9 @@ const TaskListComponent = ({
               el={el}
               changeTaskStatus={changeTaskStatus}
               changeTaskStatusDelete={changeTaskStatusDelete}
+              borderBottomTaskDivColor={borderBottomTaskDivColor}
+              removeTaskTextColor={removeTaskTextColor}
+              doneTaskTextColor={doneTaskTextColor}
             />
           );
         })}

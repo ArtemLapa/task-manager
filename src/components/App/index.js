@@ -7,26 +7,16 @@ import HeaderComponent from "../HeaderComponent";
 import FooterComponent from "../FooterComponent";
 import ContentComponent from "../ContentComponent";
 
-const theme = {
-  light: {
-    containerBgColor: "#eaeae0",
-    mainBorderColor: "#333",
-    buttonBgColor: "#eee",
-  },
-  dark: {
-    containerBgColor: "#4c4c49",
-    mainBorderColor: "#eee",
-    buttonBgColor: "#333",
-  },
-};
+import { theme } from "../../theme";
 
 const Container = styled.div`
   height: 100vh;
   width: 100vw;
-  background: ${(props) => props.containerBgColor};
+  background: ${(props) => props.containerBgGradientColor};
   display: flex;
   align-items: center;
   justify-content: center;
+  color: ${(props) => props.mainTextColor};
 `;
 
 const DeviceWrapper = styled.div`
@@ -128,7 +118,10 @@ const App = () => {
   const selectedTheme = isDarkMode ? theme.dark : theme.light;
 
   return (
-    <Container containerBgColor={selectedTheme.containerBgColor}>
+    <Container
+      containerBgGradientColor={selectedTheme.containerBgGradientColor}
+      mainTextColor={selectedTheme.mainTextColor}
+    >
       <ButtonWrapper
         mainBorderColor={selectedTheme.mainBorderColor}
         buttonBgColor={selectedTheme.buttonBgColor}
@@ -140,12 +133,14 @@ const App = () => {
       </ButtonWrapper>
 
       <DeviceWrapper
-        deviceBorderColor="#333"
-        deviceBgColor="#f3f3f3"
-        mainBorderColor="#333"
+        deviceBorderColor={selectedTheme.deviceBorderColor}
+        deviceBgColor={selectedTheme.deviceBgColor}
+        mainBorderColor={selectedTheme.mainBorderColor}
       >
         <div className="device">
-          <HeaderComponent />
+          <HeaderComponent
+            deviceBorderColor={selectedTheme.deviceBorderColor}
+          />
 
           <ContentComponent
             tasks={tasks}
@@ -153,6 +148,11 @@ const App = () => {
             setActiveTab={setActiveTab}
             changeTaskStatus={changeTaskStatus}
             changeTaskStatusDelete={changeTaskStatusDelete}
+            tabWrapperBgColor={selectedTheme.tabWrapperBgColor}
+            tabWrapperShadowColor={selectedTheme.tabWrapperShadowColor}
+            borderBottomTaskDivColor={selectedTheme.borderBottomTaskDivColor}
+            removeTaskTextColor={selectedTheme.removeTaskTextColor}
+            doneTaskTextColor={selectedTheme.doneTaskTextColor}
           />
 
           <FooterComponent
@@ -161,6 +161,11 @@ const App = () => {
             enterNewTask={enterNewTask}
             keyBoardHandler={keyBoardHandler}
             isAddTaskFormOpen={isAddTaskFormOpen}
+            addButtonWrapperBgColor={selectedTheme.addButtonWrapperBgColor}
+            addTaskFormWrapperBgColor={selectedTheme.addTaskFormWrapperBgColor}
+            hrBgColor={selectedTheme.hrBgColor}
+            inputUnderLineColor={selectedTheme.inputUnderLineColor}
+            mainTextColor={selectedTheme.mainTextColor}
           />
         </div>
       </DeviceWrapper>

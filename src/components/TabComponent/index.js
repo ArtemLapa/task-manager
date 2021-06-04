@@ -37,11 +37,16 @@ const TabComponent = ({
   tabTitle,
   tabDescription,
   taskListHeight,
+  tabWrapperBgColor,
+  tabWrapperShadowColor,
+  borderBottomTaskDivColor,
+  removeTaskTextColor,
+  doneTaskTextColor,
 }) => {
   return (
     <TabWrapper
       className={activeTab === nameTab ? "active" : ""}
-      tabWrapperShadowColor="rgba(0, 0, 0, 0.25)"
+      tabWrapperShadowColor={tabWrapperShadowColor}
     >
       <TaskTabComponent
         tasks={tasks}
@@ -49,7 +54,7 @@ const TabComponent = ({
         tabTitle={tabTitle}
         tabDescription={tabDescription}
         setActiveTab={setActiveTab}
-        tabWrapperBgColor="#fff"
+        tabWrapperBgColor={tabWrapperBgColor}
       />
       <TaskListComponent
         tasks={tasks}
@@ -58,6 +63,9 @@ const TabComponent = ({
         changeTaskStatusDelete={changeTaskStatusDelete}
         nameTab={nameTab}
         taskListHeight={taskListHeight}
+        borderBottomTaskDivColor={borderBottomTaskDivColor}
+        removeTaskTextColor={removeTaskTextColor}
+        doneTaskTextColor={doneTaskTextColor}
       />
     </TabWrapper>
   );

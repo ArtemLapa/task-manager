@@ -4,21 +4,20 @@ import styled from "styled-components";
 const HeaderWrapper = styled.div`
   padding: 30px 20px;
   position: relative;
+  .iphone_x {
+    width: 146px;
+    height: 34px;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background: ${(props) => props.deviceBorderColor};
+    top: 20px;
+    position: absolute;
+  }
 `;
 
-const DeviceIphoneWrapper = styled.div`
-  width: 146px;
-  height: 34px;
-  left: 50%;
-  transform: translate(-50%, -100%);
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-  background: ${(props) => props.deviceBorderColor};
-  top: 20px;
-  position: absolute;
-`;
-
-const HeaderComponent = () => {
+const HeaderComponent = ({ deviceBorderColor }) => {
   const day = new Date();
   let d_week = "Mon";
   switch (day.getDay()) {
@@ -42,6 +41,9 @@ const HeaderComponent = () => {
       break;
     case 6:
       d_week = "Sat";
+      break;
+    default:
+      d_week = "Error";
       break;
   }
 
@@ -83,10 +85,13 @@ const HeaderComponent = () => {
     case 11:
       month = "Dec";
       break;
+    default:
+      month = "Error";
+      break;
   }
   return (
-    <HeaderWrapper>
-      <DeviceIphoneWrapper deviceBorderColor="#333"></DeviceIphoneWrapper>
+    <HeaderWrapper deviceBorderColor={deviceBorderColor}>
+      <div className="iphone_x" />
       <h1>Hello, Artem</h1>
       <div className="greeting">{`Today, ${d_week} ${day.getDate()} ${month}`}</div>
     </HeaderWrapper>
