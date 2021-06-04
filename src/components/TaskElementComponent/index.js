@@ -1,5 +1,5 @@
 import React from "react";
-
+import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCheckSquare,
@@ -99,6 +99,36 @@ const TaskElementComponent = ({
       />
     </LiComponent>
   );
+};
+
+// TaskElementComponent.defaultProps = {
+//   cssClass: PropTypes.string,
+//   el: PropTypes.shape({
+//     id: PropTypes.number,
+//     title: PropTypes.string,
+//     done: PropTypes.bool,
+//     delete: PropTypes.bool,
+//   }),
+//   changeTaskStatus: PropTypes.func,
+//   changeTaskStatusDelete: PropTypes.func,
+//   borderBottomTaskDivColor: PropTypes.string,
+//   removeTaskTextColor: PropTypes.string,
+//   doneTaskTextColor: PropTypes.string,
+// };
+
+TaskElementComponent.propTypes = {
+  cssClass: PropTypes.string.isRequired,
+  el: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    done: PropTypes.bool.isRequired,
+    delete: PropTypes.bool.isRequired,
+  }).isRequired,
+  changeTaskStatus: PropTypes.func.isRequired,
+  changeTaskStatusDelete: PropTypes.func.isRequired,
+  borderBottomTaskDivColor: PropTypes.string.isRequired,
+  removeTaskTextColor: PropTypes.string.isRequired,
+  doneTaskTextColor: PropTypes.string.isRequired,
 };
 
 export default TaskElementComponent;

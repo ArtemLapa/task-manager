@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import TabComponent from "../TabComponent";
 import styled from "styled-components";
 
@@ -110,6 +111,19 @@ const ContentComponent = ({
       />
     </ContentWrapper>
   );
+};
+
+ContentComponent.propTypes = {
+  tasks: PropTypes.array.isRequired,
+  // activeTab,
+  // setActiveTab,
+  // changeTaskStatus,
+  // changeTaskStatusDelete,
+  // tabWrapperBgColor,
+  // tabWrapperShadowColor,
+  // borderBottomTaskDivColor,
+  // removeTaskTextColor,
+  // doneTaskTextColor,
 };
 
 export default ContentComponent;

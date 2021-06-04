@@ -99,7 +99,10 @@ const App = () => {
   };
 
   const addNewTask = () => {
-    setTasks([...tasks, { id: tasks.length + 1, title: newTask, done: false }]);
+    setTasks([
+      ...tasks,
+      { id: tasks.length + 1, title: newTask, done: false, delete: false },
+    ]);
     setNewTasks("");
   };
 

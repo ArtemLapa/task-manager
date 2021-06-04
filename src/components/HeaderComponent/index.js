@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const HeaderWrapper = styled.div`
@@ -96,6 +97,10 @@ const HeaderComponent = ({ deviceBorderColor }) => {
       <div className="greeting">{`Today, ${d_week} ${day.getDate()} ${month}`}</div>
     </HeaderWrapper>
   );
+};
+
+HeaderComponent.propTypes = {
+  deviceBorderColor: PropTypes.string.isRequired,
 };
 
 export default HeaderComponent;
