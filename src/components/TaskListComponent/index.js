@@ -52,6 +52,7 @@ const TaskListComponent = ({
           const cssClass = el.delete ? "removed" : el.done ? "done" : "";
           return (
             <TaskElementComponent
+              key={el.id}
               cssClass={cssClass}
               el={el}
               changeTaskStatus={changeTaskStatus}

@@ -28,7 +28,7 @@ export const theme = {
     mainBorderColor: "#eee",
     buttonBgColor: "#333",
 
-    deviceBorderColor: "#333",
+    deviceBorderColor: "#222",
     deviceBgColor: "#484848",
 
     addButtonWrapperBgColor: "#fff",
@@ -37,7 +37,7 @@ export const theme = {
     inputUnderLineColor: "#333",
 
     tabWrapperBgColor: "#333",
-    tabWrapperShadowColor: "rgba(0, 0, 0, 0.25)",
+    tabWrapperShadowColor: "rgba(0, 0, 0, 0.6)",
 
     borderBottomTaskDivColor: "#e8e8e8",
     removeTaskTextColor: "#ccc",

@@ -25,7 +25,7 @@ const DeviceWrapper = styled.div`
   width: 375px;
   overflow: hidden;
   border-radius: 40px;
-  box-shadow: 2px 12px 20px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 2px 12px 20px 2px ${(props) => props.tabWrapperShadowColor};
   border: 4px solid ${(props) => props.deviceBorderColor};
 
   .device {
@@ -63,7 +63,7 @@ const App = () => {
   const [tasks, setTasks] = useState(initTasks);
   const [activeTab, setActiveTab] = useState("all");
   const [isAddTaskFormOpen, setAddTaskFormOpen] = useState(false);
-  const [isDarkMode, setDarkMode] = useState(false);
+  const [isDarkMode, setDarkMode] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
@@ -136,6 +136,7 @@ const App = () => {
         deviceBorderColor={selectedTheme.deviceBorderColor}
         deviceBgColor={selectedTheme.deviceBgColor}
         mainBorderColor={selectedTheme.mainBorderColor}
+        tabWrapperShadowColor={selectedTheme.tabWrapperShadowColor}
       >
         <div className="device">
           <HeaderComponent
