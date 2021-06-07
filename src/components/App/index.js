@@ -3,7 +3,8 @@ import styled from "styled-components";
 import ChangeThemeButtonComponent from "../ChangeThemeButtonComponent";
 import { theme } from "../../theme";
 import { ThemeContext } from "../../theme/ThemeContext";
-import { TaskPageComponent } from "../../pages/TaskPageComponent";
+// import { TaskPageComponent } from "../../pages/TaskPageComponent";
+import { LoginPageComponent } from "../../pages/LoginPageComponent";
 
 const Container = styled.div`
   height: 100vh;
@@ -62,7 +63,8 @@ const App = () => {
           tabWrapperShadowColor={selectedTheme.tabWrapperShadowColor}
         >
           <div className="device">
-            <TaskPageComponent />
+            {/* <TaskPageComponent /> */}
+            <LoginPageComponent />
           </div>
         </DeviceWrapper>
       </Container>
