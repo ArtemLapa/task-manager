@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { ThemeContext } from "../../store/ThemeContext";
 import { useUserContext } from "../../store/UserContext";
+import { authUser } from "../../services/authService";
+import { useLoginContext } from "../../store/LoginContext";
 
 const ButtonWrapper = styled.button`
   border: none;
@@ -20,10 +22,23 @@ const ButtonWrapper = styled.button`
 const ButtonComponent = ({ children }) => {
   const { theme } = useContext(ThemeContext);
   const { loginAction } = useUserContext();
+  const loginData = useLoginContext();
+
+  const loginHandler = async () => {
+    try {
+      const result = await authUser({
+        email: loginData.email,
+        password: loginData.password,
+      });
+      loginAction();
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   return (
     <ButtonWrapper
-      onClick={loginAction}
+      onClick={loginHandler}
       tabWrapperBgColor={theme.containerBgColor}
       tabWrapperShadowColor={theme.tabWrapperShadowColor}
       mainTextColor={theme.mainTextColor}

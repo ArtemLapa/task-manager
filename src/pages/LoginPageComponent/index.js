@@ -3,6 +3,7 @@ import styled from "styled-components";
 // import { ThemeContext } from "../../theme/ThemeContext";
 import ButtonComponent from "../../components/ButtonComponent";
 import InputComponent from "../../components/InputComponent";
+import { LoginContextProvider } from "../../store/LoginContext";
 
 const ContentWrapper = styled.div`
   padding: 0 40px;
@@ -28,25 +29,27 @@ const LoginPageComponent = () => {
   // const { theme } = useContext(ThemeContext);
   return (
     <ContentWrapper>
-      <H1Wrapper>Login to Task Manager</H1Wrapper>
+      <LoginContextProvider>
+        <H1Wrapper>Login to Task Manager</H1Wrapper>
 
-      <InputBlockWrapper>
-        <InputComponent
-          type="email"
-          placeholder="Enter your email"
-          name="email"
-        />
-      </InputBlockWrapper>
+        <InputBlockWrapper>
+          <InputComponent
+            type="email"
+            placeholder="Enter your email"
+            name="email"
+          />
+        </InputBlockWrapper>
 
-      <InputBlockWrapper>
-        <InputComponent
-          type="password"
-          placeholder="Enter your password"
-          name="password"
-        />
-      </InputBlockWrapper>
+        <InputBlockWrapper>
+          <InputComponent
+            type="password"
+            placeholder="Enter your password"
+            name="password"
+          />
+        </InputBlockWrapper>
 
-      <ButtonComponent>Login</ButtonComponent>
+        <ButtonComponent>Login</ButtonComponent>
+      </LoginContextProvider>
     </ContentWrapper>
   );
 };

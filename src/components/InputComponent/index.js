@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { ThemeContext } from "../../store/ThemeContext";
+import { useLoginContext } from "../../store/LoginContext";
 
 const InputWrapper = styled.input`
   border: none;
@@ -16,6 +17,7 @@ const InputWrapper = styled.input`
 
 const InputComponent = ({ type, placeholder, name }) => {
   const { theme } = useContext(ThemeContext);
+  const loginData = useLoginContext();
   return (
     <InputWrapper
       type={type}
@@ -24,6 +26,10 @@ const InputComponent = ({ type, placeholder, name }) => {
       inputUnderLineColor={theme.mainBorderColor}
       addTaskFormWrapperBgColor={theme.addTaskFormWrapperBgColor}
       mainTextColor={theme.mainTextColor}
+      value={loginData[name]}
+      onChange={(e) =>
+        loginData.setInputValue({ key: name, value: e.target.value })
+      }
     />
   );
 };
