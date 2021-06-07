@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { ThemeContext } from "../../theme/ThemeContext";
+import { ThemeContext } from "../../store/ThemeContext";
 import { FooterStyledComponent } from "./index.styled";
 
 const FooterComponent = ({

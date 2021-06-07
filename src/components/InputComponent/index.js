@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { ThemeContext } from "../../theme/ThemeContext";
+import { ThemeContext } from "../../store/ThemeContext";
 
 const InputWrapper = styled.input`
   border: none;
   border-bottom: 1px solid ${(props) => props.inputUnderLineColor};
   height: 20px;
-  background-color: ${(props) => props.addTaskFormWrapperBgColor};
+  background-color: transparent;
   color: ${(props) => props.mainTextColor};
   width: 100%;
   &:focus {
@@ -21,7 +21,7 @@ const InputComponent = ({ type, placeholder, name }) => {
       type={type}
       placeholder={placeholder}
       name={name}
-      inputUnderLineColor={theme.inputUnderLineColor}
+      inputUnderLineColor={theme.mainBorderColor}
       addTaskFormWrapperBgColor={theme.addTaskFormWrapperBgColor}
       mainTextColor={theme.mainTextColor}
     />

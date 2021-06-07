@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { useUserContext } from "../../store/UserContext";
 
 const HeaderWrapper = styled.div`
   padding: 30px 20px;
@@ -16,6 +19,18 @@ const HeaderWrapper = styled.div`
     top: 20px;
     position: absolute;
   }
+`;
+
+const LogoutWrapper = styled.div`
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const HeaderComponent = ({ deviceBorderColor }) => {
@@ -90,11 +105,19 @@ const HeaderComponent = ({ deviceBorderColor }) => {
       month = "Error";
       break;
   }
+
+  const { logoutAction } = useUserContext();
   return (
     <HeaderWrapper deviceBorderColor={deviceBorderColor}>
       <div className="iphone_x" />
+
       <h1>Hello, Artem</h1>
+
       <div className="greeting">{`Today, ${d_week} ${day.getDate()} ${month}`}</div>
+
+      <LogoutWrapper onClick={logoutAction}>
+        <FontAwesomeIcon icon={faSignOutAlt} className="fa" />
+      </LogoutWrapper>
     </HeaderWrapper>
   );
 };

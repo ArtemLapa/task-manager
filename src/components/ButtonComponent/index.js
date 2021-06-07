@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { ThemeContext } from "../../theme/ThemeContext";
+import { ThemeContext } from "../../store/ThemeContext";
+import { useUserContext } from "../../store/UserContext";
 
 const ButtonWrapper = styled.button`
   border: none;
@@ -18,9 +19,12 @@ const ButtonWrapper = styled.button`
 
 const ButtonComponent = ({ children }) => {
   const { theme } = useContext(ThemeContext);
+  const { loginAction } = useUserContext();
+
   return (
     <ButtonWrapper
-      tabWrapperBgColor={theme.tabWrapperBgColor}
+      onClick={loginAction}
+      tabWrapperBgColor={theme.containerBgColor}
       tabWrapperShadowColor={theme.tabWrapperShadowColor}
       mainTextColor={theme.mainTextColor}
     >

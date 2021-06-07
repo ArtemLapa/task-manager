@@ -51,4 +51,4 @@ const LoginPageComponent = () => {
   );
 };
 
-export { LoginPageComponent };
+export default LoginPageComponent;
