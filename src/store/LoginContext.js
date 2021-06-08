@@ -7,7 +7,7 @@ LoginContext.displayName = "LoginContext";
 const useLoginContext = () => useContext(LoginContext);
 
 const LoginContextProvider = ({ children }) => {
-  const initState = { email: null, password: null };
+  const initState = { email: "", password: "" };
 
   const reducer = (state, action) => {
     switch (action.type) {
