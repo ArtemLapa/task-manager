@@ -30,6 +30,7 @@ const ButtonComponent = ({ children }) => {
         email: loginData.email,
         password: loginData.password,
       });
+      console.log(result);
       loginAction();
     } catch (e) {
       console.error(e);
